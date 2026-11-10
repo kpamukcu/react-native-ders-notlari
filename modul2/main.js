@@ -110,10 +110,11 @@ console.log(toplamSiparis)
 /* 
 
 Destructuring, Spread/Rest ve Template Literals
-Bu üç özellik, modern JavaScript'te daha az kodla daha okunabilir ve yönetilebilir uygulamalar yzaamayı sağlar. React Native geliştirirken özellikle API'den gelen verileri kullanırken, component'lere veri gönderirken ve nesneleri güncellerken sık sık kullanılır.
+Bu üç özellik, modern JavaScript'te daha az kodla daha okunabilir ve yönetilebilir uygulamalar yazmayı sağlar. React Native geliştirirken özellikle API'den gelen verileri kullanırken, component'lere veri gönderirken ve nesneleri güncellerken sık sık kullanılır.
 
 
 1. Destructuring — Verileri parçalayarak alma : Bir diz veya nesnenin içindeki değerleri ayrı değişkenlere aktarmaya sağlar.
+2. Spread - Verileri yayma. Spread operatörü ... ile yazılır. Bir dizinin veya nesnenin içindeki değerleri başka bir diziye ya da nesneye yaymamızı sağlar.
 
 */
 
@@ -131,7 +132,7 @@ const { urun, fiyat, adet, durumu } = siparis
 console.log(fiyat)      //console.log(siparis.fiyat) ile aynı response döner
 console.log(adet)       //console.log(siparis.adet) ile aynı response döner
 
-//Not: Özellikle react'ta props olarak veri gelirken siparis.adet yerine adet değişekni olarak kullanmak daha pratik ve okunaklıdır.
+//Not: Özellikle react'ta props olarak veri gelirken siparis.adet yerine adet değişkeni olarak kullanmak daha pratik ve okunaklıdır.
 
 const { urun: urunIsim, fiyat: birimFiyat } = siparis   //Değişken isimleri değiştirildi. Not: orjinal key isimleri değişmez.
 console.log(urunIsim)
@@ -141,3 +142,42 @@ const { stok = 0 } = siparis        //Siparis obje datasında stok özelliği ol
 
 
 // Array data destructuring
+// Dizilerde değerler isimlerine göre değil, sıralarına göre alınır.
+
+const renkler = ['Lacivert', 'Turkuaz', 'Beyaz']
+const [birinci, ikinci, ucuncu] = renkler
+
+console.log(birinci)    //Ekrana Lacivert yazar.
+
+// Array Destructing'te bir değeri atlamak da mümkündür.
+const [a, , c] = renkler    //ikinci parametre ataması yapılmadı.
+
+
+/* Spread Operatörü */
+// A. Dizileri Birleştirme
+const elektronik = ['Laptop', 'Klavye']
+const aksesuar = ['Mouse', 'Kulaklık']
+
+const tumUrunler = [...elektronik, ...aksesuar]
+console.log(tumUrunler)     // ['Laptop', 'Klavye', 'Mouse', 'Kulaklık']
+
+
+// B. Diziye yeni eleman ekleme
+const urunler = ['Laptop', 'Klavye']
+const yeniUrunler = [...urunler, 'Mouse']
+console.log(yeniUrunler)
+
+
+// C. Nesneleri birleştirme ve güncelleme
+const product = {
+    ad: 'Klavye',
+    fiyat: 850,
+    stok: 10
+}
+
+const productUpdate = {
+    ...product,
+    fiyat: 765              //Ürünün fiyatını 765 olarak güncelledi
+}
+
+console.log(productUpdate)
